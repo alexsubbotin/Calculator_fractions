@@ -35,14 +35,34 @@ namespace CalculatorForms
 
         private void SimpFCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            // Unchecking decimal fraction check box.
-            DecFCheckBox.Checked = false;
+            if (SimpFCheckBox.Checked)
+            {
+                // Unchecking decimal fraction check box.
+                DecFCheckBox.Checked = false;
 
-            // Dot button disabled.
-            DotBut.Enabled = false;
+                // Dot button disabled.
+                DotBut.Enabled = false;
 
-            // Converting to simple fraction button disabled.
-            ToSimpleBut.Enabled = false;
+                // Converting to simple fraction button disabled.
+                ToSimpleBut.Enabled = false;
+                ToDecBut.Enabled = true;
+            }
+        }
+
+        private void DecFCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (DecFCheckBox.Checked)
+            {
+                // Unchecking simple fraction check box.
+                SimpFCheckBox.Checked = false;
+
+                // Dot button enabled.
+                DotBut.Enabled = true;
+
+                // Converting to decimal fraction button disabled.
+                ToDecBut.Enabled = false;
+                ToSimpleBut.Enabled = true;
+            }
         }
     }
 }
