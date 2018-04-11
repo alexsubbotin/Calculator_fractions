@@ -64,5 +64,31 @@ namespace CalculatorForms
                 ToSimpleBut.Enabled = true;
             }
         }
+
+        private void MainTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Only digits.
+            if (!Char.IsDigit(e.KeyChar))
+                e.Handled = true;
+
+            // Backspace.
+            if(e.KeyChar == (char)Keys.Back && MainTextBox.Text != "" && MainTextBox.SelectionStart != 0)
+            {
+                // Creating stringbuilder to use "remove".
+                StringBuilder buffer = new StringBuilder(MainTextBox.Text);
+
+                // Storing current selection start.
+                int currSecStart = MainTextBox.SelectionStart;
+
+                // Removing a symbol.
+                buffer.Remove(currSecStart - 1, 1);
+
+                // Writing the new string.
+                MainTextBox.Text = buffer.ToString();
+
+                // Setting new selection start.
+                MainTextBox.SelectionStart = currSecStart - 1;
+            }
+        }
     }
 }
