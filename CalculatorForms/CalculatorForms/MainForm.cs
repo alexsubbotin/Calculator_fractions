@@ -89,6 +89,57 @@ namespace CalculatorForms
                 // Setting new selection start.
                 MainTextBox.SelectionStart = currSecStart - 1;
             }
+
+            // ENTER to start calculating.
+            if(e.KeyChar == (char)Keys.Enter)
+            {
+                // function to check string (like if there isn't a second bracket etc.)
+
+                // function to calculate
+            }
+        }
+
+        private void PlusBut_Click(object sender, EventArgs e)
+        {
+            // Adding the plus.
+            MainTextBox.Text += "+";
+        }
+
+        private void MinusBut_Click(object sender, EventArgs e)
+        {
+            // Adding the minus.
+            MainTextBox.Text += "-";
+        }
+
+        private void MultBut_Click(object sender, EventArgs e)
+        {
+            // Adding the multiplication sign.
+            MainTextBox.Text += "*";
+        }
+
+        private void DivBut_Click(object sender, EventArgs e)
+        {
+            // Adding the division sign.
+            MainTextBox.Text += "/";
+        }
+
+        private void Brac1But_Click(object sender, EventArgs e)
+        {
+            // Adding both brackets.
+            MainTextBox.Text += "(";
+            MainTextBox.Text += ")";
+        }
+
+        private void Bruc2But_Click(object sender, EventArgs e)
+        {
+            // Adding the closing bracket.
+            MainTextBox.Text += ")";
+        }
+
+        private void DotBut_Click(object sender, EventArgs e)
+        {
+            // Adding the dot for decimal fractions.
+            MainTextBox.Text += ".";
         }
     }
 }
