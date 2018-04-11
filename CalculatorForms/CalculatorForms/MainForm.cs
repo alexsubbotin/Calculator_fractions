@@ -32,5 +32,17 @@ namespace CalculatorForms
             // App stops working.
             Application.Exit();
         }
+
+        private void SimpFCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            // Unchecking decimal fraction check box.
+            DecFCheckBox.Checked = false;
+
+            // Dot button disabled.
+            DotBut.Enabled = false;
+
+            // Converting to simple fraction button disabled.
+            ToSimpleBut.Enabled = false;
+        }
     }
 }
