@@ -126,8 +126,7 @@ namespace CalculatorForms
         private void Brac1But_Click(object sender, EventArgs e)
         {
             // Adding both brackets.
-            MainTextBox.Text += "(";
-            MainTextBox.Text += ")";
+            MainTextBox.Text += "()";
         }
 
         private void Bruc2But_Click(object sender, EventArgs e)
