@@ -26,5 +26,11 @@ namespace CalculatorForms
             DecFCheckBox.Checked = false;
 
         }
+
+        private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            // App stops working.
+            Application.Exit();
+        }
     }
 }
