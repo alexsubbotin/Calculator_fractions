@@ -27,6 +27,10 @@ namespace CalculatorForms
 
             // Initially blocking the 2nd bracket button.
             Brac2But.Enabled = false;
+
+            // Blocking both convertors.
+            ToDecBut.Enabled = false;
+            ToSimpleBut.Enabled = false;
         }
 
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
@@ -45,10 +49,6 @@ namespace CalculatorForms
                 // Dot button disabled.
                 DotBut.Enabled = false;
 
-                // Converting to simple fraction button disabled.
-                ToSimpleBut.Enabled = false;
-                ToDecBut.Enabled = true;
-
                 // Text box clear.
                 MainTextBox.Text = "";
             }
@@ -63,10 +63,6 @@ namespace CalculatorForms
 
                 // Dot button enabled.
                 DotBut.Enabled = true;
-
-                // Converting to decimal fraction button disabled.
-                ToDecBut.Enabled = false;
-                ToSimpleBut.Enabled = true;
 
                 // Text box clear.
                 MainTextBox.Text = "";
@@ -303,6 +299,7 @@ namespace CalculatorForms
                     Brac2But.BackColor = Color.Pink;
                 }
 
+                // Deleting the last symbol.
                 MainTextBox.Text = MainTextBox.Text.Substring(0, MainTextBox.Text.Length - 1);
             }
         }
