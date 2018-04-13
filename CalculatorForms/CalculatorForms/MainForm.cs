@@ -142,7 +142,7 @@ namespace CalculatorForms
         private void Bruc2But_Click(object sender, EventArgs e)
         {
             // If previous is a digit or an another closing bracket.
-            if (Char.IsDigit(MainTextBox.Text[MainTextBox.Text.Length - 1]) || 
+            if (Char.IsDigit(MainTextBox.Text[MainTextBox.Text.Length - 1]) ||
                 MainTextBox.Text[MainTextBox.Text.Length - 1] == ')')
             {
                 // If there are not enough closing brackets.
@@ -308,6 +308,46 @@ namespace CalculatorForms
         {
             // Clear all.
             MainTextBox.Text = "";
+        }
+
+        private void ResultBut_Click(object sender, EventArgs e)
+        {
+            // Indiciates whether the string has the right format or not.
+            bool format = true;
+
+            // If it's empty.
+            if (format)
+            {
+                if (MainTextBox.Text == "")
+                {
+                    format = false;
+                    MessageBox.Show("The string is empty!", "Input error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+
+            // If there are unclosed brackets.
+            if (format)
+            {
+                if (Brac1Count != Brac2Count)
+                {
+                    format = false;
+                    MessageBox.Show("There are unclosed brackets!", "Input error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+
+            if (format)
+            {
+                if(MainTextBox.Text[MainTextBox.Text.Length - 1] == '+' ||
+                    MainTextBox.Text[MainTextBox.Text.Length - 1] == '-' ||
+                    MainTextBox.Text[MainTextBox.Text.Length - 1] == '*' ||
+                    MainTextBox.Text[MainTextBox.Text.Length - 1] == '/' ||
+                    MainTextBox.Text[MainTextBox.Text.Length - 1] == '.')
+                {
+                    format = false;
+                    MessageBox.Show("The last symbol should be a digit or the closing bracket!", "Input error!", 
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
         }
     }
 }
