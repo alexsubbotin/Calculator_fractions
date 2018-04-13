@@ -67,7 +67,7 @@ namespace CalculatorForms
 
         private void PlusBut_Click(object sender, EventArgs e)
         {
-            // If it's not the 1st symbol in the string or the previous symbol is a digit or a bracket.
+            // If it's not the 1st symbol in the string and the previous symbol is a digit or a bracket.
             if (MainTextBox.Text != "" && (Char.IsDigit(MainTextBox.Text[MainTextBox.Text.Length - 1]) ||
                 MainTextBox.Text[MainTextBox.Text.Length - 1] == ')'))
                 // Adding the plus.
@@ -76,20 +76,29 @@ namespace CalculatorForms
 
         private void MinusBut_Click(object sender, EventArgs e)
         {
-            // Adding the minus.
-            MainTextBox.Text += "-";
+            // If it's not the 1st symbol in the string and the previous symbol is a digit or a bracket.
+            if (MainTextBox.Text != "" && (Char.IsDigit(MainTextBox.Text[MainTextBox.Text.Length - 1]) ||
+                MainTextBox.Text[MainTextBox.Text.Length - 1] == ')'))
+                // Adding the minus.
+                MainTextBox.Text += "-";
         }
 
         private void MultBut_Click(object sender, EventArgs e)
         {
-            // Adding the multiplication sign.
-            MainTextBox.Text += "*";
+            // If it's not the 1st symbol in the string and the previous symbol is a digit or a bracket.
+            if (MainTextBox.Text != "" && (Char.IsDigit(MainTextBox.Text[MainTextBox.Text.Length - 1]) ||
+                MainTextBox.Text[MainTextBox.Text.Length - 1] == ')'))
+                // Adding the multiplication sign.
+                MainTextBox.Text += "*";
         }
 
         private void DivBut_Click(object sender, EventArgs e)
         {
-            // Adding the division sign.
-            MainTextBox.Text += "/";
+            // If it's not the 1st symbol in the string and the previous symbol is a digit or a bracket.
+            if (MainTextBox.Text != "" && (Char.IsDigit(MainTextBox.Text[MainTextBox.Text.Length - 1]) ||
+                MainTextBox.Text[MainTextBox.Text.Length - 1] == ')'))
+                // Adding the division sign.
+                MainTextBox.Text += "/";
         }
 
         private void Brac1But_Click(object sender, EventArgs e)
