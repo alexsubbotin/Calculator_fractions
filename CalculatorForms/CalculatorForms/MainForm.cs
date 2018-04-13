@@ -289,7 +289,12 @@ namespace CalculatorForms
             {
                 // If the last symbol is the opening bracket.
                 if (MainTextBox.Text[MainTextBox.Text.Length - 1] == '(')
+                {
                     Brac1Count--;
+
+                    Brac2But.Enabled = false;
+                    Brac2But.BackColor = Color.PaleTurquoise;
+                }
 
                 // If the last symbol is the closing bracket.
                 if (MainTextBox.Text[MainTextBox.Text.Length - 1] == ')')
