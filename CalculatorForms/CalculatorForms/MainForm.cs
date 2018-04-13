@@ -335,13 +335,11 @@ namespace CalculatorForms
                 }
             }
 
+            // If the last symbol is not a digit or the closing bracket.
             if (format)
             {
-                if(MainTextBox.Text[MainTextBox.Text.Length - 1] == '+' ||
-                    MainTextBox.Text[MainTextBox.Text.Length - 1] == '-' ||
-                    MainTextBox.Text[MainTextBox.Text.Length - 1] == '*' ||
-                    MainTextBox.Text[MainTextBox.Text.Length - 1] == '/' ||
-                    MainTextBox.Text[MainTextBox.Text.Length - 1] == '.')
+                if (!Char.IsDigit(MainTextBox.Text[MainTextBox.Text.Length - 1]) &&
+                    MainTextBox.Text[MainTextBox.Text.Length - 1] != ')')
                 {
                     format = false;
                     MessageBox.Show("The last symbol should be a digit or the closing bracket!", "Input error!", 
