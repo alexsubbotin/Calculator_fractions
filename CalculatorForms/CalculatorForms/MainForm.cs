@@ -67,8 +67,11 @@ namespace CalculatorForms
 
         private void PlusBut_Click(object sender, EventArgs e)
         {
-            // Adding the plus.
-            MainTextBox.Text += "+";
+            // If it's not the 1st symbol in the string or the previous symbol is a digit or a bracket.
+            if (MainTextBox.Text != "" && (Char.IsDigit(MainTextBox.Text[MainTextBox.Text.Length - 1]) ||
+                MainTextBox.Text[MainTextBox.Text.Length - 1] == ')'))
+                // Adding the plus.
+                MainTextBox.Text += "+";
         }
 
         private void MinusBut_Click(object sender, EventArgs e)
@@ -92,7 +95,7 @@ namespace CalculatorForms
         private void Brac1But_Click(object sender, EventArgs e)
         {
             // Adding both brackets.
-            MainTextBox.Text += "()";
+            MainTextBox.Text += "(";
         }
 
         private void Bruc2But_Click(object sender, EventArgs e)
