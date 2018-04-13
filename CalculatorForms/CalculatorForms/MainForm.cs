@@ -376,6 +376,9 @@ namespace CalculatorForms
                     ToDecBut.Enabled = true;
                 else
                     ToSimpleBut.Enabled = true;
+
+                int buf = 0;
+                MainTextBox.Text = Controller.Calculate(MainTextBox.Text, ref buf);
             }
         }
     }
