@@ -145,8 +145,9 @@ namespace CalculatorForms
 
         private void Bruc2But_Click(object sender, EventArgs e)
         {
-            // If previous is a digit.
-            if (Char.IsDigit(MainTextBox.Text[MainTextBox.Text.Length - 1]))
+            // If previous is a digit or an another closing bracket.
+            if (Char.IsDigit(MainTextBox.Text[MainTextBox.Text.Length - 1]) || 
+                MainTextBox.Text[MainTextBox.Text.Length - 1] == ')')
             {
                 // If there are not enough closing brackets.
                 if (Brac2Count != Brac1Count)
@@ -279,6 +280,26 @@ namespace CalculatorForms
             // If previous is a digit.
             if (MainTextBox.Text != "" && Char.IsDigit(MainTextBox.Text[MainTextBox.Text.Length - 1]))
                 MainTextBox.Text += "0";
+        }
+
+        private void BackBut_Click(object sender, EventArgs e)
+        {
+            // If it's not empty then delete one last symbol.
+            if (MainTextBox.Text != "")
+            {
+                // If the last symbol is the opening bracket.
+                if (MainTextBox.Text[MainTextBox.Text.Length - 1] == '(')
+                    Brac1Count--;
+
+                // If the last symbol is the closing bracket.
+                if (MainTextBox.Text[MainTextBox.Text.Length - 1] == ')')
+                {
+                    Brac2Count--;
+                    Brac2But.BackColor = Color.Pink;
+                }
+
+                MainTextBox.Text = MainTextBox.Text.Substring(0, MainTextBox.Text.Length - 1);
+            }
         }
     }
 }
