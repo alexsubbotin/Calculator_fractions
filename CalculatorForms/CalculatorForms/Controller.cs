@@ -26,12 +26,16 @@ namespace CalculatorForms
             // The result.
             string result = "";
 
+            // Indicates that the X was found.
             bool Xfound = false;
 
-            while (currentIndex < s.Length)
+            // Indiciates that it's the end of the brackets.
+            bool getOut = false;
+
+            while (currentIndex < s.Length && !getOut)
             {
                 // While the current symbol is a digit / '(' / '.'
-                while (!Xfound && 
+                while (currentIndex < s.Length && !Xfound && 
                     (Char.IsDigit(s[currentIndex]) || s[currentIndex] == '(' || s[currentIndex] == '.'))
                 {
                     // If it's the '(' then send the rest to the Calculate method.
@@ -46,7 +50,14 @@ namespace CalculatorForms
                         currentIndex++;
                     }
                 }
+
+                // X found.
                 Xfound = true;
+
+                // If all the string was gone through.
+                if (currentIndex == s.Length)
+                    break;
+
                 // Store the symbol of an operation.
                 operation = s[currentIndex].ToString();
 
@@ -95,8 +106,15 @@ namespace CalculatorForms
                         break;
                 }
 
+                // Writing the result to the X.
                 X = result;
+
+                // Clearing the Y.
                 Y = "";
+
+                // IF the previous is the ')' then get out of the cycle.
+                if (s[currentIndex - 1] == ')')
+                    getOut = true;
             }
 
             return X;
