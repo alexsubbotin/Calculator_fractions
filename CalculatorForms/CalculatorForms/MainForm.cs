@@ -25,6 +25,8 @@ namespace CalculatorForms
             SimpFCheckBox.Checked = true;
             DecFCheckBox.Checked = false;
 
+            // Initially blocking the 2nd bracket button.
+            Brac2But.Enabled = false;
         }
 
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
@@ -101,16 +103,40 @@ namespace CalculatorForms
                 MainTextBox.Text += "/";
         }
 
+        // The number of the opening brackets.
+        public int Brac1Count = 0;
+        // The number of the closing brackets.
+        public int Brac2Count = 0;
+
         private void Brac1But_Click(object sender, EventArgs e)
         {
-            // Adding both brackets.
+            // Adding the 1st bracket.
             MainTextBox.Text += "(";
+            Brac1Count++;
+
+            // Enabling the 2nd bracket button and color it.
+            Brac2But.Enabled = true;
+            Brac2But.BackColor = Color.Pink;
         }
 
         private void Bruc2But_Click(object sender, EventArgs e)
         {
-            // Adding the closing bracket.
-            MainTextBox.Text += ")";
+            // If there are not enough closing brackets.
+            if (Brac2Count != Brac1Count)
+            {
+                // Adding the closing bracket.
+                MainTextBox.Text += ")";
+                Brac2Count++;
+
+                // If all the brackets are closed now.
+                if (Brac2Count == Brac1Count)
+                {
+                    // Coloring back.
+                    Brac2But.BackColor = Color.PaleTurquoise;
+                    // Disabling.
+                    Brac2But.Enabled = false;
+                }
+            }
         }
 
         private void DotBut_Click(object sender, EventArgs e)
