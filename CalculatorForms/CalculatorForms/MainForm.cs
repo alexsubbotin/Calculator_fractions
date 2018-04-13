@@ -51,6 +51,10 @@ namespace CalculatorForms
 
                 // Text box clear.
                 MainTextBox.Text = "";
+
+                // Block converters.
+                ToSimpleBut.Enabled = false;
+                ToDecBut.Enabled = false;
             }
         }
 
@@ -66,6 +70,10 @@ namespace CalculatorForms
 
                 // Text box clear.
                 MainTextBox.Text = "";
+
+                // Block converters.
+                ToSimpleBut.Enabled = false;
+                ToDecBut.Enabled = false;
             }
         }
 
@@ -301,6 +309,13 @@ namespace CalculatorForms
 
                 // Deleting the last symbol.
                 MainTextBox.Text = MainTextBox.Text.Substring(0, MainTextBox.Text.Length - 1);
+
+                // If it has become empty then block converters.
+                if(MainTextBox.Text == "")
+                {
+                    ToSimpleBut.Enabled = false;
+                    ToDecBut.Enabled = false;
+                }
             }
         }
 
