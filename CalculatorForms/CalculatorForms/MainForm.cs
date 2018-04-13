@@ -88,10 +88,13 @@ namespace CalculatorForms
 
         private void MinusBut_Click(object sender, EventArgs e)
         {
-            // If it's not the 1st symbol in the string and the previous symbol is a digit or a bracket.
-            if (MainTextBox.Text != "" && (Char.IsDigit(MainTextBox.Text[MainTextBox.Text.Length - 1]) ||
-                MainTextBox.Text[MainTextBox.Text.Length - 1] == ')'))
+            // If it's the previous is not a minus.
+            if (MainTextBox.Text != "" && MainTextBox.Text[MainTextBox.Text.Length - 1] != '-')
                 // Adding the minus.
+                MainTextBox.Text += "-";
+
+            // If the first.
+            if (MainTextBox.Text == "")
                 MainTextBox.Text += "-";
         }
 
