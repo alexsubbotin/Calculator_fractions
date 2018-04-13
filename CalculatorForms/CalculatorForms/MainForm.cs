@@ -378,7 +378,10 @@ namespace CalculatorForms
                     ToSimpleBut.Enabled = true;
 
                 int buf = 0;
-                MainTextBox.Text = Controller.Calculate(MainTextBox.Text, ref buf);
+                string result = Controller.Calculate(MainTextBox.Text, ref buf);
+                PreviousStrLabel.Text = MainTextBox.Text + "=" + result;
+                MainTextBox.Text = result;
+                
             }
         }
     }
