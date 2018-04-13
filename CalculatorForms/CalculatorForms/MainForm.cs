@@ -308,6 +308,10 @@ namespace CalculatorForms
         {
             // Clear all.
             MainTextBox.Text = "";
+
+            // Blocking converters.
+            ToSimpleBut.Enabled = false;
+            ToDecBut.Enabled = false;
         }
 
         private void ResultBut_Click(object sender, EventArgs e)
@@ -345,6 +349,18 @@ namespace CalculatorForms
                     MessageBox.Show("The last symbol should be a digit or the closing bracket!", "Input error!", 
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
+            }
+
+            // If the input string has a right format
+            if (format)
+            {
+                // Calculations.
+
+                // Enabling converters.
+                if (SimpFCheckBox.Checked)
+                    ToDecBut.Enabled = true;
+                else
+                    ToSimpleBut.Enabled = true;
             }
         }
     }
