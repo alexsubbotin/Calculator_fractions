@@ -51,12 +51,12 @@ namespace CalculatorForms
                     }
                 }
 
-                // X found.
-                Xfound = true;
-
                 // If all the string was gone through.
                 if (currentIndex == s.Length)
                     break;
+
+                // X found.
+                Xfound = true;
 
                 // Store the symbol of an operation.
                 operation = s[currentIndex].ToString();
