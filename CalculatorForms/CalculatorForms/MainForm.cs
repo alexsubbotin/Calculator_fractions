@@ -301,5 +301,11 @@ namespace CalculatorForms
                 MainTextBox.Text = MainTextBox.Text.Substring(0, MainTextBox.Text.Length - 1);
             }
         }
+
+        private void ClearBut_Click(object sender, EventArgs e)
+        {
+            // Clear all.
+            MainTextBox.Text = "";
+        }
     }
 }
