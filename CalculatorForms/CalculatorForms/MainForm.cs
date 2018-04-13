@@ -110,39 +110,74 @@ namespace CalculatorForms
 
         private void Brac1But_Click(object sender, EventArgs e)
         {
-            // Adding the 1st bracket.
-            MainTextBox.Text += "(";
-            Brac1Count++;
+            if (MainTextBox.Text != "")
+            {
+                // If the previous is not a digit, a dot, a bracket.
+                if (!Char.IsDigit(MainTextBox.Text[MainTextBox.Text.Length - 1]) &&
+                    MainTextBox.Text[MainTextBox.Text.Length - 1] != '.' && MainTextBox.Text[MainTextBox.Text.Length - 1] != ')')
+                {
+                    // Adding the 1st bracket.
+                    MainTextBox.Text += "(";
+                    Brac1Count++;
 
-            // Enabling the 2nd bracket button and color it.
-            Brac2But.Enabled = true;
-            Brac2But.BackColor = Color.Pink;
+                    // Enabling the 2nd bracket button and color it.
+                    Brac2But.Enabled = true;
+                    Brac2But.BackColor = Color.Pink;
+                }
+            }
+            else
+            {
+                // Adding the 1st bracket.
+                MainTextBox.Text += "(";
+                Brac1Count++;
+
+                // Enabling the 2nd bracket button and color it.
+                Brac2But.Enabled = true;
+                Brac2But.BackColor = Color.Pink;
+            }
         }
 
         private void Bruc2But_Click(object sender, EventArgs e)
         {
-            // If there are not enough closing brackets.
-            if (Brac2Count != Brac1Count)
+            // If previous is a digit.
+            if (Char.IsDigit(MainTextBox.Text[MainTextBox.Text.Length - 1]))
             {
-                // Adding the closing bracket.
-                MainTextBox.Text += ")";
-                Brac2Count++;
-
-                // If all the brackets are closed now.
-                if (Brac2Count == Brac1Count)
+                // If there are not enough closing brackets.
+                if (Brac2Count != Brac1Count)
                 {
-                    // Coloring back.
-                    Brac2But.BackColor = Color.PaleTurquoise;
-                    // Disabling.
-                    Brac2But.Enabled = false;
+                    // Adding the closing bracket.
+                    MainTextBox.Text += ")";
+                    Brac2Count++;
+
+                    // If all the brackets are closed now.
+                    if (Brac2Count == Brac1Count)
+                    {
+                        // Coloring back.
+                        Brac2But.BackColor = Color.PaleTurquoise;
+                        // Disabling.
+                        Brac2But.Enabled = false;
+                    }
                 }
             }
         }
 
         private void DotBut_Click(object sender, EventArgs e)
         {
-            // Adding the dot for decimal fractions.
-            MainTextBox.Text += ".";
+            // If it's not the 1st symbol in the string and the previous symbol is a digit.
+            if (MainTextBox.Text != "" && (Char.IsDigit(MainTextBox.Text[MainTextBox.Text.Length - 1])))
+                // Adding the dot.
+                MainTextBox.Text += ".";
+        }
+
+        private void But1_Click(object sender, EventArgs e)
+        {
+            // If previous is not a closing bracket.
+            if (MainTextBox.Text != "" && MainTextBox.Text[MainTextBox.Text.Length - 1] != ')')
+                MainTextBox.Text += "1";
+
+            // If it's empty.
+            if (MainTextBox.Text == "")
+                MainTextBox.Text += "1";
         }
     }
 }
