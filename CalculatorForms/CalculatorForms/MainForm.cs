@@ -28,7 +28,7 @@ namespace CalculatorForms
             // Initially blocking the 2nd bracket button.
             Brac2But.Enabled = false;
 
-            // Blocking both convertors.
+            // Blocking both converters.
             ToDecBut.Enabled = false;
             ToSimpleBut.Enabled = false;
         }
