@@ -45,25 +45,70 @@ namespace Fractions
         {
             Numerator = _num;
             Denominator = _den;
-        }
-        private Fraction Simplify(Fraction a)
-        {
-            int div = GCD(a.Numerator, a.Denominator);
-            a.Numerator /= div;
-            a.Denominator /= div;
+            Simplify();
         }
         public static Fraction operator +(Fraction a, Fraction b)
         {
             if (a.Denominator == b.Denominator)
             {
                 Fraction newFract = new Fraction(a.Numerator + b.Numerator, a.Denominator);
-                return newFract.Simplify(newFract);
+                newFract.Simplify();
+                return newFract;
             }
             Fraction tmp = new Fraction();
             int newDen = LCM(a.Denominator, b.Denominator);
             tmp.Denominator = newDen;
             tmp.Numerator = a.Numerator * (newDen / a.Denominator) + b.Numerator * (newDen / b.Denominator);
-            return tmp.Simplify(tmp);
+            tmp.Simplify();
+            return tmp;
+        }
+        public static Fraction operator -(Fraction a, Fraction b)
+        {
+            if (a.Denominator == b.Denominator)
+            {
+                Fraction newFract = new Fraction(a.Numerator - b.Numerator, a.Denominator);
+                newFract.Simplify();
+                return newFract;
+            }
+            Fraction tmp = new Fraction();
+            int newDen = LCM(a.Denominator, b.Denominator);
+            tmp.Denominator = newDen;
+            tmp.Numerator = a.Numerator * (newDen / a.Denominator) - b.Numerator * (newDen / b.Denominator);
+            tmp.Simplify();
+            return tmp;
+        }
+        public static Fraction operator *(Fraction a, Fraction b)
+        {
+            Fraction newFract = new Fraction(a.Numerator * b.Numerator, a.Denominator * b.Denominator);
+            newFract.Simplify();
+            return newFract;
+        }
+        public static Fraction operator /(Fraction a, Fraction b)
+        {
+            b = new Fraction(b.Denominator, b.Numerator);
+            return a * b;
+        }
+        private void Simplify()
+        {
+            int div = GCD(Math.Abs(Numerator), Math.Abs(Denominator));
+            Numerator /= div;
+            Denominator /= div;
+        }
+        private static int GCD(int a, int b)
+        {
+            if (b == 0)
+            {
+                return a;
+            }
+            return GCD(b, a % b);
+        }
+        private static int LCM(int a, int b)
+        {
+            return a * b / GCD(a, b);
+        }
+        public override string ToString()
+        {
+            return Numerator + "/" + Denominator;
         }
     }
 }
