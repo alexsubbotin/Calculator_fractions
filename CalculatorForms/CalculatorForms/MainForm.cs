@@ -48,6 +48,9 @@ namespace CalculatorForms
                 // Converting to simple fraction button disabled.
                 ToSimpleBut.Enabled = false;
                 ToDecBut.Enabled = true;
+
+                // Text box clear.
+                MainTextBox.Text = "";
             }
         }
 
@@ -64,6 +67,9 @@ namespace CalculatorForms
                 // Converting to decimal fraction button disabled.
                 ToDecBut.Enabled = false;
                 ToSimpleBut.Enabled = true;
+
+                // Text box clear.
+                MainTextBox.Text = "";
             }
         }
 
