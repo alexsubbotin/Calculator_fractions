@@ -179,5 +179,100 @@ namespace CalculatorForms
             if (MainTextBox.Text == "")
                 MainTextBox.Text += "1";
         }
+
+        private void But2_Click(object sender, EventArgs e)
+        {
+            // If previous is not a closing bracket.
+            if (MainTextBox.Text != "" && MainTextBox.Text[MainTextBox.Text.Length - 1] != ')')
+                MainTextBox.Text += "2";
+
+            // If it's empty.
+            if (MainTextBox.Text == "")
+                MainTextBox.Text += "2";
+        }
+
+        private void But3_Click(object sender, EventArgs e)
+        {
+            // If previous is not a closing bracket.
+            if (MainTextBox.Text != "" && MainTextBox.Text[MainTextBox.Text.Length - 1] != ')')
+                MainTextBox.Text += "3";
+
+            // If it's empty.
+            if (MainTextBox.Text == "")
+                MainTextBox.Text += "3";
+        }
+
+        private void But4_Click(object sender, EventArgs e)
+        {
+            // If previous is not a closing bracket.
+            if (MainTextBox.Text != "" && MainTextBox.Text[MainTextBox.Text.Length - 1] != ')')
+                MainTextBox.Text += "4";
+
+            // If it's empty.
+            if (MainTextBox.Text == "")
+                MainTextBox.Text += "4";
+        }
+
+        private void But5_Click(object sender, EventArgs e)
+        {
+            // If previous is not a closing bracket.
+            if (MainTextBox.Text != "" && MainTextBox.Text[MainTextBox.Text.Length - 1] != ')')
+                MainTextBox.Text += "5";
+
+            // If it's empty.
+            if (MainTextBox.Text == "")
+                MainTextBox.Text += "5";
+        }
+
+        private void But6_Click(object sender, EventArgs e)
+        {
+            // If previous is not a closing bracket.
+            if (MainTextBox.Text != "" && MainTextBox.Text[MainTextBox.Text.Length - 1] != ')')
+                MainTextBox.Text += "6";
+
+            // If it's empty.
+            if (MainTextBox.Text == "")
+                MainTextBox.Text += "6";
+        }
+
+        private void but7_Click(object sender, EventArgs e)
+        {
+            // If previous is not a closing bracket.
+            if (MainTextBox.Text != "" && MainTextBox.Text[MainTextBox.Text.Length - 1] != ')')
+                MainTextBox.Text += "7";
+
+            // If it's empty.
+            if (MainTextBox.Text == "")
+                MainTextBox.Text += "7";
+        }
+
+        private void But8_Click(object sender, EventArgs e)
+        {
+            // If previous is not a closing bracket.
+            if (MainTextBox.Text != "" && MainTextBox.Text[MainTextBox.Text.Length - 1] != ')')
+                MainTextBox.Text += "8";
+
+            // If it's empty.
+            if (MainTextBox.Text == "")
+                MainTextBox.Text += "8";
+        }
+
+        private void But9_Click(object sender, EventArgs e)
+        {
+            // If previous is not a closing bracket.
+            if (MainTextBox.Text != "" && MainTextBox.Text[MainTextBox.Text.Length - 1] != ')')
+                MainTextBox.Text += "9";
+
+            // If it's empty.
+            if (MainTextBox.Text == "")
+                MainTextBox.Text += "9";
+        }
+
+        private void But10_Click(object sender, EventArgs e)
+        {
+            // If previous is a digit.
+            if (MainTextBox.Text != "" && Char.IsDigit(MainTextBox.Text[MainTextBox.Text.Length - 1]))
+                MainTextBox.Text += "0";
+        }
     }
 }
