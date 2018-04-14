@@ -19,7 +19,7 @@ namespace CalculatorForms
             s = DecFracMultAndDiv(s);
 
             // Calcualte addition and substraction
-            s = DecFracAddAndSubs(s);
+            s = DecFracAddAndSub(s);
             return s;
         }
 
@@ -30,25 +30,36 @@ namespace CalculatorForms
             if (s.IndexOf('(') != -1)
             {
                 // Start of brackets.
-                int startIndex = s.IndexOf('(');
+                int startIndex = s.IndexOf('(') + 1;
 
                 // End of brackets.
-                int endIndex = s.LastIndexOf(')');
+                int endIndex = startIndex;
 
-                // String in brackets.
-                string newS = "";
+                // While we haven't seen all the string.
+                while(endIndex < s.Length)
+                {
+                    // If it's new brackets then calculate them and add.
+                    if(s[endIndex] == '(')
+                    {
+                        s = s.Substring(0, endIndex) + DecFracCalcAll(s.Substring(endIndex, s.Length - endIndex));
+                    }
 
-                // Getting the string in brackets.
-                newS = s.Substring(startIndex + 1, endIndex - startIndex - 1);
+                    // If it's the closing bracket then calcualte everything inside.
+                    if (startIndex != s.Length && s[endIndex] == ')')
+                    {
+                        s = s.Substring(0, startIndex - 1) + DecFracCalcAll(s.Substring(startIndex, endIndex - startIndex)) +
+                            s.Substring(endIndex + 1, s.Length - endIndex - 1);
 
-                // Calculate it.
-                newS = DecFracCalcAll(newS);
+                        // Again calcualting what's left.
+                        s = CalculateBrackets(s);
+                    }
 
-                // Insert in the original string.
-                if (endIndex != s.Length - 1)
-                    s = s.Substring(0, startIndex) + newS + s.Substring(endIndex + 1, s.Length - endIndex + 1);
-                else
-                    s = s.Substring(0, startIndex) + newS;
+                    // If there are no brackets left then leave.
+                    if (s.IndexOf('(') == -1)
+                        break;
+                    else
+                        endIndex++;
+                }
             }
 
             return s;
@@ -161,12 +172,12 @@ namespace CalculatorForms
         }
 
         // Function to calculate addition and substraction.
-        public static string DecFracAddAndSubs(string s)
+        public static string DecFracAddAndSub(string s)
         {
             // Calcualting addition.
             s = DecAddition(s);
 
-            // Calculating substraction.
+            // Calculating subtraction.
             s = DecSubstration(s);
 
             return s;
@@ -219,13 +230,13 @@ namespace CalculatorForms
             return s;
         }
 
-        // Calculating substraction.
+        // Calculating subtraction.
         public static string DecSubstration(string s)
         {
-            // If there is substraction.
+            // If there is subtraction.
             while (s.LastIndexOf('-') != -1)
             {
-                // Index of the substraction sign.
+                // Index of the subtraction sign.
                 int subsIndex = s.LastIndexOf('-');
 
                 // The minuend.
