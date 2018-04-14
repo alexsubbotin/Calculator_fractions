@@ -3,28 +3,29 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Fractions;
 
 namespace Calculations
 {
     public class Calculations
     {
-        public static Fractions Plus(Fractions a, Fractions b)
+        public static Fraction Plus(Fraction a, Fraction b)
         {
             return a + b;
         }
-        public static Fractions Minus(Fractions a, Fractions b)
+        public static Fraction Minus(Fraction a, Fraction b)
         {
             return a - b;
         }
-        public static Fractions Multiply(Fractions a, Fractions b)
+        public static Fraction Multiply(Fraction a, Fraction b)
         {
             return a * b;
         }
-        public static Fractions Divide(Fractions a, Fractions b)
+        public static Fraction Divide(Fraction a, Fraction b)
         {
             return a / b;
         }
-        public static double ToDecimal(Fractions curFrac)
+        public static double ToDecimal(Fraction curFrac)
         {
             return (double)(curFrac.Numerator) / curFrac.Denumerator;
         }
@@ -40,10 +41,10 @@ namespace Calculations
             denum = (int)Math.Pow(10, i);
             return new int[]{ numer, denum};
         }
-        public static Fractions ToSimpleFraction(double value)
+        public static Fraction ToSimpleFraction(double value)
         {
             int[] pairNum_Denum = GetNumeratorAndDenum(value);
-            return new Fractions(pairNum_Denum[0], pairNum_Denum[1]);
+            return new Fraction(pairNum_Denum[0], pairNum_Denum[1]);
         }
     }
 }
