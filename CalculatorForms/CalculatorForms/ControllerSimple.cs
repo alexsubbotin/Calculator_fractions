@@ -24,7 +24,17 @@ namespace CalculatorForms
             // Creating a fraction object in oerder to get rid of several /.
             Fraction fr = new Fraction();
             if (CreateFraction(s, ref fr))
-                s = fr.ToString();
+            {
+                if (fr.Denominator != 1 && fr.Denominator != -1)
+                    s = fr.ToString();
+                else
+                {
+                    if (fr.Denominator == -1)
+                        s = "-" + fr.Numerator.ToString();
+                    else
+                        s = fr.Numerator.ToString();
+                }
+            }
             else
                 s = "Cannot be calculated!";
 
@@ -242,17 +252,36 @@ namespace CalculatorForms
                 Fraction xFrac = new Fraction();
                 Fraction yFrac = new Fraction();
 
-                // If both can be fractions then calcualte and add to the original string.
-                if (CreateFraction(X, ref xFrac) && CreateFraction(Y, ref yFrac))
+                if (X != "" && Y != "")
                 {
-                    string result = Calculations.Minus(xFrac, yFrac).ToString();
+                    // If both can be fractions then calcualte and add to the original string.
+                    if (CreateFraction(X, ref xFrac) && CreateFraction(Y, ref yFrac))
+                    {
+                        string result = Calculations.Minus(xFrac, yFrac).ToString();
 
-                    s = s.Substring(0, startIndex + 1) + result + s.Substring(endIndex, s.Length - endIndex);
+                        s = s.Substring(0, startIndex + 1) + result + s.Substring(endIndex, s.Length - endIndex);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Input error!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        break;
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("Input error!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    break;
+                    if (X == "")
+                    {
+                        if (CreateFraction(Y, ref yFrac))
+                            s = yFrac.ToString();
+                        else
+                        {
+                            MessageBox.Show("Input error!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            s = "Cannot be calculated!";
+                            return s;
+                        }
+                    }
+                    else
+                        s = X;
                 }
             }
 
