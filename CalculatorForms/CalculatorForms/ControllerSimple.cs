@@ -23,9 +23,12 @@ namespace CalculatorForms
 
             // Creating a fraction object in oerder to get rid of several /.
             Fraction fr = new Fraction();
-            CreateFraction(s, ref fr);
+            if (CreateFraction(s, ref fr))
+                s = fr.ToString();
+            else
+                s = "Cannot be calculated!";
 
-            return fr.ToString();
+            return s;
         }
 
         // Function to find and calcualte brackets.
@@ -111,7 +114,7 @@ namespace CalculatorForms
                 Fraction yFrac = new Fraction();
 
                 // If both can be fractions then calcualte and add to the original string.
-                if(CreateFraction(X, ref xFrac) && CreateFraction(Y, ref yFrac))
+                if (CreateFraction(X, ref xFrac) && CreateFraction(Y, ref yFrac))
                 {
                     string result = Calculations.Multiply(xFrac, yFrac).ToString();
 
@@ -273,7 +276,7 @@ namespace CalculatorForms
                 int denom = 1;
 
                 // Checking all the symbols.
-                for(int i = 0; i < frac.Length; i++)
+                for (int i = 0; i < frac.Length; i++)
                 {
                     // If it's an integer then add it.
                     if (Int32.TryParse(frac[i], out buf))
@@ -290,7 +293,15 @@ namespace CalculatorForms
                         return false;
                 }
 
-                fraction = new Fraction(numer, denom);
+                try
+                {
+                    fraction = new Fraction(numer, denom);
+                }
+                catch
+                {
+                    return false;
+                }
+
                 return true;
             }
             else
