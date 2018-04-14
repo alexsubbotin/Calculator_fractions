@@ -127,7 +127,8 @@ namespace CalculatorForms
                 else
                 {
                     MessageBox.Show("Input error!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    break;
+                    s = "Cannot be calculated!";
+                    return s;
                 }
             }
 
@@ -182,7 +183,8 @@ namespace CalculatorForms
                 else
                 {
                     MessageBox.Show("Input error!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    break;
+                    s = "Cannot be calculated!";
+                    return s;
                 }
             }
 
@@ -252,7 +254,8 @@ namespace CalculatorForms
                 else
                 {
                     MessageBox.Show("Input error!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    break;
+                    s = "Cannot be calculated!";
+                    return s;
                 }
             }
 
@@ -301,7 +304,7 @@ namespace CalculatorForms
                 // If the subtrahend is not empty
                 if (X != "" && Y != "")
                 {
-                    if (CheckDouble(X) && CheckDouble(Y))
+                    if (CheckDouble(X) && CheckDouble(Y) && Y != "0")
                     {
                         // Getting the result.
                         result = (Convert.ToDouble(X) - Convert.ToDouble(Y)).ToString();
@@ -312,7 +315,8 @@ namespace CalculatorForms
                     else
                     {
                         MessageBox.Show("Input error!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        break;
+                        s = "Cannot be calculated!";
+                        return s;
                     }
                 }
                 else
@@ -323,7 +327,8 @@ namespace CalculatorForms
                         else
                         {
                             MessageBox.Show("Input error!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            break;
+                            s = "Cannot be calculated!";
+                            return s;
                         }
                     else
                         s = X;
