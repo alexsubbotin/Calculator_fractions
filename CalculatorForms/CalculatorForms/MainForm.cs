@@ -299,7 +299,7 @@ namespace CalculatorForms
         private void But10_Click(object sender, EventArgs e)
         {
             // If previous is a digit.
-            if (MainTextBox.Text != "" && Char.IsDigit(MainTextBox.Text[MainTextBox.Text.Length - 1]))
+            //if (MainTextBox.Text != "" && Char.IsDigit(MainTextBox.Text[MainTextBox.Text.Length - 1]))
                 MainTextBox.Text += "0";
         }
 
