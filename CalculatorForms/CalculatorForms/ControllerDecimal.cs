@@ -9,7 +9,7 @@ namespace CalculatorForms
     // Stores needed functions.
     class ControllerDecimal
     {
-        // Function to calculate mathematical expresions with decimal fractions.
+        // Function to calculate mathematical expressions with decimal fractions.
         public static string DecFracCalcAll(string s)
         {
             // Calculate brackets.
