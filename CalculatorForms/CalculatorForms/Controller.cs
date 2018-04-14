@@ -85,7 +85,8 @@ namespace CalculatorForms
                 int startIndex = multIndex - 1;
 
                 // Getting the 1st multiplier.
-                while (startIndex > -1 && (Char.IsDigit(s[startIndex]) || s[startIndex] == ','))
+                while (startIndex > -1 && (Char.IsDigit(s[startIndex]) || s[startIndex] == ',' ||
+                    (startIndex == 0 && s[startIndex] == '-')))
                 {
                     X = s[startIndex] + X;
                     startIndex--;
@@ -95,7 +96,8 @@ namespace CalculatorForms
                 int endIndex = multIndex + 1;
 
                 // Getting the 2nd multiplier.
-                while (endIndex < s.Length && (Char.IsDigit(s[endIndex]) || s[endIndex] == ','))
+                while (endIndex < s.Length && (Char.IsDigit(s[endIndex]) || s[endIndex] == ',' ||
+                    (endIndex == multIndex + 1 && s[endIndex] == '-')))
                 {
                     Y += s[endIndex];
                     endIndex++;
@@ -222,7 +224,7 @@ namespace CalculatorForms
             if (s.IndexOf('-') == 0)
             {
                 // Replacing (-a) with (a - 2*a).
-                s = DecReplaceNegative(s);
+                //s = DecReplaceNegative(s);
             }
 
             // If there is substraction.
@@ -268,28 +270,28 @@ namespace CalculatorForms
         }
         
         // Replacing (-a) with (a - 2*a).
-        public static string DecReplaceNegative(string s)
-        {
-            // Index that finds the negative value.
-            int startIndex = 1;
+        //public static string DecReplaceNegative(string s)
+        //{
+        //    // Index that finds the negative value.
+        //    int startIndex = 1;
 
-            // The value.
-            string value = "";
+        //    // The value.
+        //    string value = "";
 
-            // Getting the value.
-            while (startIndex < s.Length && (Char.IsDigit(s[startIndex]) || s[startIndex] == '.'))
-            {
-                value += s[startIndex];
-                startIndex++;
-            }
+        //    // Getting the value.
+        //    while (startIndex < s.Length && (Char.IsDigit(s[startIndex]) || s[startIndex] == '.'))
+        //    {
+        //        value += s[startIndex];
+        //        startIndex++;
+        //    }
 
-            // Replacing (-value) with (value - 2*value).
-            string newValue = value + "-" + (2 * Convert.ToDouble(value)).ToString();
+        //    // Replacing (-value) with (value - 2*value).
+        //    string newValue = value + "-" + (2 * Convert.ToDouble(value)).ToString();
 
-            // Inserting the new value in the original string.
-            s = newValue + s.Substring(startIndex, s.Length - startIndex);
+        //    // Inserting the new value in the original string.
+        //    s = newValue + s.Substring(startIndex, s.Length - startIndex);
 
-            return s;
-        }
+        //    return s;
+        //}
     }
 }
