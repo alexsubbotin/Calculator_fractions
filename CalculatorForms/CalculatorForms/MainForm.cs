@@ -55,6 +55,12 @@ namespace CalculatorForms
                 // Block converters.
                 ToSimpleBut.Enabled = false;
                 ToDecBut.Enabled = false;
+
+                // Brackets initial settings.
+                Brac1Count = 0;
+                Brac2Count = 0;
+                Brac2But.Enabled = false;
+                Brac2But.BackColor = Color.PaleTurquoise;
             }
         }
 
@@ -74,6 +80,12 @@ namespace CalculatorForms
                 // Block converters.
                 ToSimpleBut.Enabled = false;
                 ToDecBut.Enabled = false;
+
+                // Brackets initial settings.
+                Brac1Count = 0;
+                Brac2Count = 0;
+                Brac2But.Enabled = false;
+                Brac2But.BackColor = Color.PaleTurquoise;
             }
         }
 
@@ -385,8 +397,7 @@ namespace CalculatorForms
                 else
                     ToSimpleBut.Enabled = true;
 
-                int buf = 0;
-
+                // If it's the decimal calculations.
                 string result = "";
                 if (DecFCheckBox.Checked)
                     result = ControllerDecimal.DecFracCalcAll(MainTextBox.Text);
