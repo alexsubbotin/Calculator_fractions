@@ -133,7 +133,8 @@ namespace CalculatorForms
                 else
                 {
                     MessageBox.Show("Input error!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    break;
+                    s = "Cannot be calculated!";
+                    return s; ;
                 }
             }
 
@@ -205,7 +206,8 @@ namespace CalculatorForms
                 else
                 {
                     MessageBox.Show("Input error!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    break;
+                    s = "Cannot be calculated!";
+                    return s;
                 }
             }
 
@@ -264,7 +266,8 @@ namespace CalculatorForms
                     else
                     {
                         MessageBox.Show("Input error!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        break;
+                        s = "Cannot be calculated!";
+                        return s;
                     }
                 }
                 else
