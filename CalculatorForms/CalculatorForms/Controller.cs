@@ -187,7 +187,8 @@ namespace CalculatorForms
                 int startIndex = addIndex - 1;
 
                 // Getting the 1st summand.
-                while (startIndex > -1 && (Char.IsDigit(s[startIndex]) || s[startIndex] == ','))
+                while (startIndex > -1 && (Char.IsDigit(s[startIndex]) || s[startIndex] == ',' ||
+                    (startIndex == 0 && s[startIndex] == '-')))
                 {
                     X = s[startIndex] + X;
                     startIndex--;
@@ -197,7 +198,8 @@ namespace CalculatorForms
                 int endIndex = addIndex + 1;
 
                 // Getting the 2nd summand.
-                while (endIndex < s.Length && (Char.IsDigit(s[endIndex]) || s[endIndex] == ','))
+                while (endIndex < s.Length && (Char.IsDigit(s[endIndex]) || s[endIndex] == ',' ||
+                    (endIndex == addIndex + 1 && s[endIndex] == '-')))
                 {
                     Y += s[endIndex];
                     endIndex++;
