@@ -381,7 +381,7 @@ namespace CalculatorForms
                     ToSimpleBut.Enabled = true;
 
                 int buf = 0;
-                string result = Controller.Calculate(MainTextBox.Text, ref buf);
+                string result = Controller.DecFracCalcAll(MainTextBox.Text);
                 PreviousStrLabel.Text = MainTextBox.Text + "=" + result;
                 MainTextBox.Text = result;
                 
