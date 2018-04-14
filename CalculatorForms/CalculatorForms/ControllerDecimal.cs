@@ -199,7 +199,7 @@ namespace CalculatorForms
             s = DecAddition(s);
 
             // Calculating subtraction.
-            s = DecSubstration(s);
+            s = DecSubtration(s);
 
             return s;
         }
@@ -260,7 +260,7 @@ namespace CalculatorForms
         }
 
         // Calculating subtraction.
-        public static string DecSubstration(string s)
+        public static string DecSubtration(string s)
         {
             // If there is subtraction.
             while (s.LastIndexOf('-') != -1)
