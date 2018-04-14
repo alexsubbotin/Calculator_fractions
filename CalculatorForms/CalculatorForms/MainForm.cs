@@ -88,8 +88,10 @@ namespace CalculatorForms
 
         private void MinusBut_Click(object sender, EventArgs e)
         {
-            // If it's the previous is not a minus.
-            if (MainTextBox.Text != "" && MainTextBox.Text[MainTextBox.Text.Length - 1] != '-')
+            // If it's the previous is not + - * /.
+            if (MainTextBox.Text != "" && MainTextBox.Text[MainTextBox.Text.Length - 1] != '-' &&
+                MainTextBox.Text[MainTextBox.Text.Length - 1] != '+' && MainTextBox.Text[MainTextBox.Text.Length - 1] != '*' &&
+                MainTextBox.Text[MainTextBox.Text.Length - 1] != '/')
                 // Adding the minus.
                 MainTextBox.Text += "-";
 
