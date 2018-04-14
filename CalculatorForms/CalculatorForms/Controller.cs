@@ -163,11 +163,11 @@ namespace CalculatorForms
         // Function to calculate addition and substraction.
         public static string DecFracAddAndSubs(string s)
         {
-            // Calculating substraction.
-            s = DecSubstration(s);
-
             // Calcualting addition.
             s = DecAddition(s);
+
+            // Calculating substraction.
+            s = DecSubstration(s);
 
             return s;
         }
@@ -222,18 +222,11 @@ namespace CalculatorForms
         // Calculating substraction.
         public static string DecSubstration(string s)
         {
-            // If it's the first in the string (negative value).
-            if (s.IndexOf('-') == 0)
-            {
-                // Replacing (-a) with (a - 2*a).
-                //s = DecReplaceNegative(s);
-            }
-
             // If there is substraction.
-            while (s.IndexOf('-') > 0)
+            while (s.LastIndexOf('-') != -1)
             {
                 // Index of the substraction sign.
-                int addIndex = s.IndexOf('-');
+                int subsIndex = s.LastIndexOf('-');
 
                 // The minuend.
                 string X = "";
@@ -242,58 +235,50 @@ namespace CalculatorForms
                 string Y = "";
 
                 // Index that finds the minuend.
-                int startIndex = addIndex - 1;
+                int startIndex = subsIndex - 1;
 
                 // Getting the minuend.
-                while (startIndex > -1 && (Char.IsDigit(s[startIndex]) || s[startIndex] == ','))
+                while (startIndex > -1 && (Char.IsDigit(s[startIndex]) || s[startIndex] == ',' ||
+                    (startIndex == 0 && s[startIndex] == '-')))
                 {
                     X = s[startIndex] + X;
                     startIndex--;
                 }
 
                 // Index that finds the subtrahend.
-                int endIndex = addIndex + 1;
+                int endIndex = subsIndex + 1;
 
-                // Getting the subtrahendd.
-                while (endIndex < s.Length && (Char.IsDigit(s[endIndex]) || s[endIndex] == ','))
+                // Getting the subtrahend.
+                while (endIndex < s.Length && (Char.IsDigit(s[endIndex]) || s[endIndex] == ',' ||
+                    (endIndex == subsIndex + 1 && s[endIndex] == '-')))
                 {
                     Y += s[endIndex];
                     endIndex++;
                 }
 
-                // Getting the result.
-                string result = (Convert.ToDouble(X) - Convert.ToDouble(Y)).ToString();
+                string result = "";
 
-                // Inserting the result in the original string.
-                s = s.Substring(0, startIndex + 1) + result + s.Substring(endIndex, s.Length - endIndex);
+                // If the subtrahend is not empty
+                if (X != "" && Y != "")
+                {
+                    // Getting the result.
+                    result = (Convert.ToDouble(X) - Convert.ToDouble(Y)).ToString();
+
+                    // Inserting the result in the original string.
+                    s = s.Substring(0, startIndex + 1) + result + s.Substring(endIndex, s.Length - endIndex);
+                }
+                else
+                {
+                    if (X == "")
+                        s = (0 - Convert.ToDouble(Y)).ToString();
+                    else
+                        s = X;
+
+                    return s;
+                }
             }
 
             return s;
         }
-        
-        // Replacing (-a) with (a - 2*a).
-        //public static string DecReplaceNegative(string s)
-        //{
-        //    // Index that finds the negative value.
-        //    int startIndex = 1;
-
-        //    // The value.
-        //    string value = "";
-
-        //    // Getting the value.
-        //    while (startIndex < s.Length && (Char.IsDigit(s[startIndex]) || s[startIndex] == '.'))
-        //    {
-        //        value += s[startIndex];
-        //        startIndex++;
-        //    }
-
-        //    // Replacing (-value) with (value - 2*value).
-        //    string newValue = value + "-" + (2 * Convert.ToDouble(value)).ToString();
-
-        //    // Inserting the new value in the original string.
-        //    s = newValue + s.Substring(startIndex, s.Length - startIndex);
-
-        //    return s;
-        //}
     }
 }
