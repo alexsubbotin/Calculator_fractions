@@ -299,8 +299,11 @@ namespace CalculatorForms
                 {
                     Brac1Count--;
 
-                    Brac2But.Enabled = false;
-                    Brac2But.BackColor = Color.PaleTurquoise;
+                    if (Brac1Count == 0)
+                    {
+                        Brac2But.Enabled = false;
+                        Brac2But.BackColor = Color.PaleTurquoise;
+                    }
                 }
 
                 // If the last symbol is the closing bracket.
