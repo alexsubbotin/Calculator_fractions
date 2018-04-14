@@ -192,6 +192,9 @@ namespace CalculatorForms
         // Function to calculate addition and substraction.
         public static string DecFracAddAndSub(string s)
         {
+            // Replacing -- with +.
+            s = ReplaceDoubleMinuses(s);
+
             // Calcualting addition.
             s = DecAddition(s);
 
@@ -328,6 +331,18 @@ namespace CalculatorForms
                     return s;
                 }
             }
+
+            return s;
+        }
+
+        // Replacing every -- with +.
+        public static string ReplaceDoubleMinuses(string s)
+        {
+            StringBuilder sb = new StringBuilder(s);
+
+            sb.Replace("--", "+");
+
+            s = sb.ToString();
 
             return s;
         }
