@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace CalculatorForms
 {
@@ -114,11 +115,20 @@ namespace CalculatorForms
                     endIndex++;
                 }
 
-                // Getting the result.
-                string result = (Convert.ToDouble(X) * Convert.ToDouble(Y)).ToString();
+                string result = "";
+                if (CheckDouble(X) && CheckDouble(Y))
+                {
+                    // Getting the result.
+                    result = (Convert.ToDouble(X) * Convert.ToDouble(Y)).ToString();
 
-                // Inserting the result in the original string.
-                s = s.Substring(0, startIndex + 1) + result + s.Substring(endIndex, s.Length - endIndex);
+                    // Inserting the result in the original string.
+                    s = s.Substring(0, startIndex + 1) + result + s.Substring(endIndex, s.Length - endIndex);
+                }
+                else
+                {
+                    MessageBox.Show("Input error!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    break;
+                }
             }
 
             return s;
@@ -161,11 +171,19 @@ namespace CalculatorForms
                     endIndex++;
                 }
 
-                // Getting the result.
-                string result = (Convert.ToDouble(X) / Convert.ToDouble(Y)).ToString();
+                if (CheckDouble(X) && CheckDouble(Y))
+                {
+                    // Getting the result.
+                    string result = (Convert.ToDouble(X) / Convert.ToDouble(Y)).ToString();
 
-                // Inserting the result in the original string.
-                s = s.Substring(0, startIndex + 1) + result + s.Substring(endIndex, s.Length - endIndex);
+                    // Inserting the result in the original string.
+                    s = s.Substring(0, startIndex + 1) + result + s.Substring(endIndex, s.Length - endIndex);
+                }
+                else
+                {
+                    MessageBox.Show("Input error!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    break;
+                }
             }
 
             return s;
@@ -220,11 +238,19 @@ namespace CalculatorForms
                     endIndex++;
                 }
 
-                // Getting the result.
-                string result = (Convert.ToDouble(X) + Convert.ToDouble(Y)).ToString();
+                if (CheckDouble(X) && CheckDouble(Y))
+                {
+                    // Getting the result.
+                    string result = (Convert.ToDouble(X) + Convert.ToDouble(Y)).ToString();
 
-                // Inserting the result in the original string.
-                s = s.Substring(0, startIndex + 1) + result + s.Substring(endIndex, s.Length - endIndex);
+                    // Inserting the result in the original string.
+                    s = s.Substring(0, startIndex + 1) + result + s.Substring(endIndex, s.Length - endIndex);
+                }
+                else
+                {
+                    MessageBox.Show("Input error!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    break;
+                }
             }
 
             return s;
@@ -272,16 +298,30 @@ namespace CalculatorForms
                 // If the subtrahend is not empty
                 if (X != "" && Y != "")
                 {
-                    // Getting the result.
-                    result = (Convert.ToDouble(X) - Convert.ToDouble(Y)).ToString();
+                    if (CheckDouble(X) && CheckDouble(Y))
+                    {
+                        // Getting the result.
+                        result = (Convert.ToDouble(X) - Convert.ToDouble(Y)).ToString();
 
-                    // Inserting the result in the original string.
-                    s = s.Substring(0, startIndex + 1) + result + s.Substring(endIndex, s.Length - endIndex);
+                        // Inserting the result in the original string.
+                        s = s.Substring(0, startIndex + 1) + result + s.Substring(endIndex, s.Length - endIndex);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Input error!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        break;
+                    }
                 }
                 else
                 {
                     if (X == "")
+                        if(CheckDouble(Y))
                         s = (0 - Convert.ToDouble(Y)).ToString();
+                        else
+                        {
+                            MessageBox.Show("Input error!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            break;
+                        }
                     else
                         s = X;
 
@@ -290,6 +330,13 @@ namespace CalculatorForms
             }
 
             return s;
+        }
+
+        // Function to check the format.
+        public static bool CheckDouble(string obj)
+        {
+            double buf;
+            return Double.TryParse(obj, out buf);
         }
     }
 }
