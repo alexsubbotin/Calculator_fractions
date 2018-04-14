@@ -9,115 +9,110 @@ namespace CalculatorForms
     // Stores needed functions.
     class Controller
     {
-        public static string Calculate(string s, ref int globalIndex)
+        // Function to calculate mathematical expresions with decimal fractions.
+        public static string DecFracCalcAll(string s)
         {
-            // The first element.
-            string X = "";
+            // Calculate brackets.
+            s = CalculateBrackets(s);
 
-            // The second element.
-            string Y = "";
+            // Calcualte multiplication and division.
+            s = DecFracMultAndDiv(s);
 
-            // The operation between the elements.
-            string operation = "";
+            // Calcualte addition and substraction
+            s = DecFracPlusMinus(s);
+            return s;
+        }
 
-            // Current index in the string.
-            int currentIndex = 0;
-
-            // The result.
-            string result = "";
-
-            // Indicates that the X was found.
-            bool Xfound = false;
-
-            // Indiciates that it's the end of the brackets.
-            bool getOut = false;
-
-            while (currentIndex < s.Length && !getOut)
+        // Function to calculate everything in brackets.
+        public static string CalculateBrackets(string s)
+        {
+            // If there are brackets at all.
+            if (s.IndexOf('(') != -1)
             {
-                // While the current symbol is a digit / '(' / '.'
-                while (currentIndex < s.Length && !Xfound && 
-                    (Char.IsDigit(s[currentIndex]) || s[currentIndex] == '(' || s[currentIndex] == '.'))
-                {
-                    // If it's the '(' then send the rest to the Calculate method.
-                    if (s[currentIndex] == '(')
-                    {
-                        X += Calculate(s.Substring(currentIndex + 1, s.Length - currentIndex - 1), ref currentIndex);
-                    }
-                    // If it's a digit/ '.' then store it.
-                    else
-                    {
-                        X += s[currentIndex];
-                        currentIndex++;
-                    }
-                }
+                // Start of brackets.
+                int startIndex = s.IndexOf('(');
 
-                // If all the string was gone through.
-                if (currentIndex == s.Length)
-                    break;
+                // End of brackets.
+                int endIndex = s.LastIndexOf(')');
 
-                // X found.
-                Xfound = true;
+                // String in brackets.
+                string newS = "";
 
-                // Store the symbol of an operation.
-                operation = s[currentIndex].ToString();
+                // Getting the string in brackets.
+                newS = s.Substring(startIndex + 1, endIndex - startIndex - 1);
 
-                // Going to the next symbol.
-                currentIndex++;
+                // Calculate it.
+                newS = DecFracCalcAll(newS);
 
-                // While the current symbol is a digit / '(' / ')' / '.'
-                while (currentIndex < s.Length &&
-                    (Char.IsDigit(s[currentIndex]) || s[currentIndex] == '(' || s[currentIndex] == ')' || s[currentIndex] == '.'))
-                {
-
-                    // If it's the '(' then send the rest to the Calculate method.
-                    if (s[currentIndex] == '(')
-                    {
-                        Y += Calculate(s.Substring(currentIndex + 1, s.Length - currentIndex - 1), ref currentIndex);
-                    }
-                    else
-                    {
-                        // If it's a digit '.' then store it.
-                        if (Char.IsDigit(s[currentIndex]) || s[currentIndex] == '.')
-                        {
-                            Y += s[currentIndex];
-                        }
-
-                        currentIndex++;
-                    }
-                }
-
-                // In the string which used the Calculate method we skip (currentindex + 1) symbols.
-                globalIndex += currentIndex + 1;
-
-                // Operations.
-                switch (operation)
-                {
-                    case "+":
-                        result = (Convert.ToInt32(X) + Convert.ToInt32(Y)).ToString();
-                        break;
-                    case "-":
-                        result = (Convert.ToInt32(X) - Convert.ToInt32(Y)).ToString();
-                        break;
-                    case "*":
-                        result = (Convert.ToInt32(X) * Convert.ToInt32(Y)).ToString();
-                        break;
-                    case "/":
-                        result = (Convert.ToInt32(X) / Convert.ToInt32(Y)).ToString();
-                        break;
-                }
-
-                // Writing the result to the X.
-                X = result;
-
-                // Clearing the Y.
-                Y = "";
-
-                // IF the previous is the ')' then get out of the cycle.
-                if (s[currentIndex - 1] == ')')
-                    getOut = true;
+                // Insert in the original string.
+                s = s.Substring(0, startIndex) + newS + s.Substring(endIndex + 1, s.Length - endIndex + 1);
             }
 
-            return X;
+            return s;
+        }
+
+        // Function to calcualte multiplication and division.
+        public static string DecFracMultAndDiv(string s)
+        {
+            // If there are those operations at all.
+            if (s.IndexOf('*') != -1 || s.IndexOf('/') != -1)
+            {
+                int multIndex = s.IndexOf('*');
+
+
+            }
+            else
+                return s;
+        }
+
+        public static string DecFracPlusMinus(string s)
+        {
+            string X = "";
+            string Y = "";
+
+            int currIndex = 0;
+
+            while (currIndex < s.Length && s[currIndex] != '+')
+            {
+                if (s[currIndex] == '-')
+                    if (currIndex == 1 || !Char.IsDigit(s[currIndex - 1]))
+                    {
+                        X += s[currIndex];
+                        currIndex++;
+                    }
+                    else
+                        break;
+
+                X += s[currIndex];
+                currIndex++;
+            }
+
+            if (X != s)
+                X = DecFracCalcAll(X);
+
+            if (currIndex != s.Length)
+            {
+                string operation = s[currIndex].ToString();
+                currIndex++;
+
+                while (currIndex < s.Length)
+                {
+                    Y += s[currIndex];
+                    currIndex++;
+                }
+
+                Y = DecFracCalcAll(Y);
+
+                double res;
+                if (operation == "+")
+                    res = Convert.ToDouble(X) + Convert.ToDouble(Y);
+                else
+                    res = Convert.ToDouble(X) - Convert.ToDouble(Y);
+
+                return res.ToString();
+            }
+            else
+                return X;
         }
     }
 }
