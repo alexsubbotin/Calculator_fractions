@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace CalculatorForms
 {
     // Stores needed functions.
-    class Controller
+    class ControllerDecimal
     {
         // Function to calculate mathematical expresions with decimal fractions.
         public static string DecFracCalcAll(string s)
