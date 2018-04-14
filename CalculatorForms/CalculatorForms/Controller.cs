@@ -45,7 +45,10 @@ namespace CalculatorForms
                 newS = DecFracCalcAll(newS);
 
                 // Insert in the original string.
-                s = s.Substring(0, startIndex) + newS + s.Substring(endIndex + 1, s.Length - endIndex + 1);
+                if (endIndex != s.Length - 1)
+                    s = s.Substring(0, startIndex) + newS + s.Substring(endIndex + 1, s.Length - endIndex + 1);
+                else
+                    s = s.Substring(0, startIndex) + newS;
             }
 
             return s;
@@ -221,7 +224,7 @@ namespace CalculatorForms
             }
 
             // If there is substraction.
-            while (s.IndexOf('-') != -1)
+            while (s.IndexOf('-') > 0)
             {
                 // Index of the substraction sign.
                 int addIndex = s.IndexOf('-');
