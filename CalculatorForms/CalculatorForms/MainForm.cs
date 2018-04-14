@@ -401,6 +401,8 @@ namespace CalculatorForms
                 string result = "";
                 if (DecFCheckBox.Checked)
                     result = ControllerDecimal.DecFracCalcAll(MainTextBox.Text);
+                else
+                    result = ControllerSimple.SimpFracCalcAll(MainTextBox.Text);
 
                 PreviousStrLabel.Text = MainTextBox.Text + "=" + result;
                 MainTextBox.Text = result;
