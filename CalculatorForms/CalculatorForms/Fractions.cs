@@ -31,7 +31,7 @@ namespace CalculatorForms
             {
                 if (value == 0)
                 {
-                    return;
+                    throw (new ArgumentException());
                 }
                 denominator = value;
             }
