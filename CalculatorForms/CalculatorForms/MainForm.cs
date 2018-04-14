@@ -407,5 +407,21 @@ namespace CalculatorForms
 
             }
         }
+
+        private void ToSimpleBut_Click(object sender, EventArgs e)
+        {
+            Fraction fr = Calculations.ToSimpleFraction(Convert.ToDouble(MainTextBox.Text));
+            SimpFCheckBox.Checked = true;
+            MainTextBox.Text = fr.ToString(); 
+        }
+
+        private void ToDecBut_Click(object sender, EventArgs e)
+        {
+            Fraction fr = new Fraction();
+            ControllerSimple.CreateFraction(MainTextBox.Text, ref fr);
+            double dec = Calculations.ToDecimal(fr);
+            DecFCheckBox.Checked = true;
+            MainTextBox.Text = dec.ToString();
+        }
     }
 }
