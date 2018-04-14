@@ -19,7 +19,7 @@ namespace CalculatorForms
             s = DecFracMultAndDiv(s);
 
             // Calcualte addition and substraction
-            s = DecFracPlusMinus(s);
+            s = DecFracAddAndSubs(s);
             return s;
         }
 
@@ -54,65 +54,237 @@ namespace CalculatorForms
         // Function to calcualte multiplication and division.
         public static string DecFracMultAndDiv(string s)
         {
-            // If there are those operations at all.
-            if (s.IndexOf('*') != -1 || s.IndexOf('/') != -1)
-            {
-                int multIndex = s.IndexOf('*');
+            // Calcualte multiplication.
+            s = DecMult(s);
 
+            // Calculate division.
+            s = DecDiv(s);
 
-            }
-            else
-                return s;
+            return s;
         }
 
-        public static string DecFracPlusMinus(string s)
+        // Calcualting multiplication.
+        public static string DecMult(string s)
         {
-            string X = "";
-            string Y = "";
-
-            int currIndex = 0;
-
-            while (currIndex < s.Length && s[currIndex] != '+')
+            // If there is multiplication.
+            while (s.IndexOf('*') != -1)
             {
-                if (s[currIndex] == '-')
-                    if (currIndex == 1 || !Char.IsDigit(s[currIndex - 1]))
-                    {
-                        X += s[currIndex];
-                        currIndex++;
-                    }
-                    else
-                        break;
+                // Index of the multiplication sign.
+                int multIndex = s.IndexOf('*');
 
-                X += s[currIndex];
-                currIndex++;
-            }
+                // The first multiplier.
+                string X = "";
 
-            if (X != s)
-                X = DecFracCalcAll(X);
+                // The second multiplier.
+                string Y = "";
 
-            if (currIndex != s.Length)
-            {
-                string operation = s[currIndex].ToString();
-                currIndex++;
+                // Index that finds the 1st multiplier.
+                int startIndex = multIndex - 1;
 
-                while (currIndex < s.Length)
+                // Getting the 1st multiplier.
+                while (startIndex > -1 && (Char.IsDigit(s[startIndex]) || s[startIndex] == ','))
                 {
-                    Y += s[currIndex];
-                    currIndex++;
+                    X = s[startIndex] + X;
+                    startIndex--;
                 }
 
-                Y = DecFracCalcAll(Y);
+                // Index that finds the 2nd multiplier.
+                int endIndex = multIndex + 1;
 
-                double res;
-                if (operation == "+")
-                    res = Convert.ToDouble(X) + Convert.ToDouble(Y);
-                else
-                    res = Convert.ToDouble(X) - Convert.ToDouble(Y);
+                // Getting the 2nd multiplier.
+                while (endIndex < s.Length && (Char.IsDigit(s[endIndex]) || s[endIndex] == ','))
+                {
+                    Y += s[endIndex];
+                    endIndex++;
+                }
 
-                return res.ToString();
+                // Getting the result.
+                string result = (Convert.ToDouble(X) * Convert.ToDouble(Y)).ToString();
+
+                // Inserting the result in the original string.
+                s = s.Substring(0, startIndex + 1) + result + s.Substring(endIndex, s.Length - endIndex);
             }
-            else
-                return X;
+
+            return s;
+        }
+
+        // Calculating division.
+        public static string DecDiv(string s)
+        {
+            // If there is division.
+            while (s.IndexOf('/') != -1)
+            {
+                // Index of the division sign.
+                int multIndex = s.IndexOf('/');
+
+                // The divisor.
+                string X = "";
+
+                // The divident.
+                string Y = "";
+
+                // Index that finds the divisor.
+                int startIndex = multIndex - 1;
+
+                // Getting the divisor.
+                while (startIndex > -1 && (Char.IsDigit(s[startIndex]) || s[startIndex] == ','))
+                {
+                    X = s[startIndex] + X;
+                    startIndex--;
+                }
+
+                // Index that finds the divident.
+                int endIndex = multIndex + 1;
+
+                // Getting the divident.
+                while (endIndex < s.Length && (Char.IsDigit(s[endIndex]) || s[endIndex] == ','))
+                {
+                    Y += s[endIndex];
+                    endIndex++;
+                }
+
+                // Getting the result.
+                string result = (Convert.ToDouble(X) / Convert.ToDouble(Y)).ToString();
+
+                // Inserting the result in the original string.
+                s = s.Substring(0, startIndex + 1) + result + s.Substring(endIndex, s.Length - endIndex);
+            }
+
+            return s;
+        }
+
+        // Function to calculate addition and substraction.
+        public static string DecFracAddAndSubs(string s)
+        {
+            // Calculating substraction.
+            s = DecSubstration(s);
+
+            // Calcualting addition.
+            s = DecAddition(s);
+
+            return s;
+        }
+
+        // Calculating addition.
+        public static string DecAddition(string s)
+        {
+            // If there is addition.
+            while (s.IndexOf('+') != -1)
+            {
+                // Index of the addition sign.
+                int addIndex = s.IndexOf('+');
+
+                // The first summand.
+                string X = "";
+
+                // The second summand.
+                string Y = "";
+
+                // Index that finds the 1st summand.
+                int startIndex = addIndex - 1;
+
+                // Getting the 1st summand.
+                while (startIndex > -1 && (Char.IsDigit(s[startIndex]) || s[startIndex] == ','))
+                {
+                    X = s[startIndex] + X;
+                    startIndex--;
+                }
+
+                // Index that finds the 2nd summand.
+                int endIndex = addIndex + 1;
+
+                // Getting the 2nd summand.
+                while (endIndex < s.Length && (Char.IsDigit(s[endIndex]) || s[endIndex] == ','))
+                {
+                    Y += s[endIndex];
+                    endIndex++;
+                }
+
+                // Getting the result.
+                string result = (Convert.ToDouble(X) + Convert.ToDouble(Y)).ToString();
+
+                // Inserting the result in the original string.
+                s = s.Substring(0, startIndex + 1) + result + s.Substring(endIndex, s.Length - endIndex);
+            }
+
+            return s;
+        }
+
+        // Calculating substraction.
+        public static string DecSubstration(string s)
+        {
+            // If it's the first in the string (negative value).
+            if (s.IndexOf('-') == 0)
+            {
+                // Replacing (-a) with (a - 2*a).
+                s = DecReplaceNegative(s);
+            }
+
+            // If there is substraction.
+            while (s.IndexOf('-') != -1)
+            {
+                // Index of the substraction sign.
+                int addIndex = s.IndexOf('-');
+
+                // The minuend.
+                string X = "";
+
+                // The subtrahend.
+                string Y = "";
+
+                // Index that finds the minuend.
+                int startIndex = addIndex - 1;
+
+                // Getting the minuend.
+                while (startIndex > -1 && (Char.IsDigit(s[startIndex]) || s[startIndex] == ','))
+                {
+                    X = s[startIndex] + X;
+                    startIndex--;
+                }
+
+                // Index that finds the subtrahend.
+                int endIndex = addIndex + 1;
+
+                // Getting the subtrahendd.
+                while (endIndex < s.Length && (Char.IsDigit(s[endIndex]) || s[endIndex] == ','))
+                {
+                    Y += s[endIndex];
+                    endIndex++;
+                }
+
+                // Getting the result.
+                string result = (Convert.ToDouble(X) - Convert.ToDouble(Y)).ToString();
+
+                // Inserting the result in the original string.
+                s = s.Substring(0, startIndex + 1) + result + s.Substring(endIndex, s.Length - endIndex);
+            }
+
+            return s;
+        }
+        
+        // Replacing (-a) with (a - 2*a).
+        public static string DecReplaceNegative(string s)
+        {
+            // Index that finds the negative value.
+            int startIndex = 1;
+
+            // The value.
+            string value = "";
+
+            // Getting the value.
+            while (startIndex < s.Length && (Char.IsDigit(s[startIndex]) || s[startIndex] == '.'))
+            {
+                value += s[startIndex];
+                startIndex++;
+            }
+
+            // Replacing (-value) with (value - 2*value).
+            string newValue = value + "-" + (2 * Convert.ToDouble(value)).ToString();
+
+            // Inserting the new value in the original string.
+            s = newValue + s.Substring(startIndex, s.Length - startIndex);
+
+            return s;
         }
     }
 }
