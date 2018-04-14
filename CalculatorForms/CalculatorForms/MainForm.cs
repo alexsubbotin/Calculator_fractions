@@ -389,7 +389,7 @@ namespace CalculatorForms
 
                 string result = "";
                 if (DecFCheckBox.Checked)
-                    result = Controller.DecFracCalcAll(MainTextBox.Text);
+                    result = ControllerDecimal.DecFracCalcAll(MainTextBox.Text);
 
                 PreviousStrLabel.Text = MainTextBox.Text + "=" + result;
                 MainTextBox.Text = result;
