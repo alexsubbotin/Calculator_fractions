@@ -180,7 +180,7 @@ namespace CalculatorForms
             // If it's not the 1st symbol in the string and the previous symbol is a digit.
             if (MainTextBox.Text != "" && (Char.IsDigit(MainTextBox.Text[MainTextBox.Text.Length - 1])))
                 // Adding the dot.
-                MainTextBox.Text += ".";
+                MainTextBox.Text += ",";
         }
 
         private void But1_Click(object sender, EventArgs e)
@@ -314,7 +314,7 @@ namespace CalculatorForms
                 MainTextBox.Text = MainTextBox.Text.Substring(0, MainTextBox.Text.Length - 1);
 
                 // If it has become empty then block converters.
-                if(MainTextBox.Text == "")
+                if (MainTextBox.Text == "")
                 {
                     ToSimpleBut.Enabled = false;
                     ToDecBut.Enabled = false;
@@ -364,7 +364,7 @@ namespace CalculatorForms
                     MainTextBox.Text[MainTextBox.Text.Length - 1] != ')')
                 {
                     format = false;
-                    MessageBox.Show("The last symbol should be a digit or the closing bracket!", "Input error!", 
+                    MessageBox.Show("The last symbol should be a digit or the closing bracket!", "Input error!",
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
@@ -381,10 +381,14 @@ namespace CalculatorForms
                     ToSimpleBut.Enabled = true;
 
                 int buf = 0;
-                string result = Controller.DecFracCalcAll(MainTextBox.Text);
+
+                string result = "";
+                if (DecFCheckBox.Checked)
+                    result = Controller.DecFracCalcAll(MainTextBox.Text);
+
                 PreviousStrLabel.Text = MainTextBox.Text + "=" + result;
                 MainTextBox.Text = result;
-                
+
             }
         }
     }
