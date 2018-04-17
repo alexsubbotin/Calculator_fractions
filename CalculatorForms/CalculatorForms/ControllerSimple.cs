@@ -21,22 +21,26 @@ namespace CalculatorForms
             // Addition and subtraction
             s = SimpAddAndSub(s);
 
-            // Creating a fraction object in oerder to get rid of several /.
-            Fraction fr = new Fraction();
-            if (CreateFraction(s, ref fr))
+            if (s.IndexOf('*') == -1 && s.IndexOf('+') == -1 && s.IndexOf('-') == -1 &&
+                s.IndexOf('(') == -1 && s.IndexOf(')') == -1)
             {
-                if (fr.Denominator != 1 && fr.Denominator != -1)
-                    s = fr.ToString();
-                else
+                // Creating a fraction object in oerder to get rid of several /.
+                Fraction fr = new Fraction();
+                if (CreateFraction(s, ref fr))
                 {
-                    if (fr.Denominator == -1)
-                        s = "-" + fr.Numerator.ToString();
+                    if (fr.Denominator != 1 && fr.Denominator != -1)
+                        s = fr.ToString();
                     else
-                        s = fr.Numerator.ToString();
+                    {
+                        if (fr.Denominator == -1)
+                            s = "-" + fr.Numerator.ToString();
+                        else
+                            s = fr.Numerator.ToString();
+                    }
                 }
+                else
+                    s = "Cannot be calculated!";
             }
-            else
-                s = "Cannot be calculated!";
 
             return s;
         }
@@ -217,7 +221,7 @@ namespace CalculatorForms
         public static string SimpSub(string s)
         {
             // If there is subtraction.
-            while (s.IndexOf('-') != -1)
+            if(s.IndexOf('-') != -1)
             {
                 // Index of the multiplication sign.
                 int multIndex = s.IndexOf('-');
@@ -275,7 +279,7 @@ namespace CalculatorForms
                     if (X == "")
                     {
                         if (CreateFraction(Y, ref yFrac))
-                            s = yFrac.ToString();
+                            s = "-" + yFrac.ToString();
                         else
                         {
                             MessageBox.Show("Input error!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -338,8 +342,16 @@ namespace CalculatorForms
             }
             else
             {
-                fraction = new Fraction(Convert.ToInt32(s), 1);
+                try
+                {
+                    fraction = new Fraction(Convert.ToInt32(s), 1);
+                }
+                catch
+                {
+                    return false;
+                }
                 return true;
+            
             }
         }
     }
